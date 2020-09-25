@@ -43,17 +43,8 @@ public class PasswordService implements IPasswordService{
 	
 	@Override
 	public void initializePassword() {
-		String priorityInitialPassword = "P0000";
-		String normalInitialPassword = "N0000";
-		Boolean isPriority = true;
-		Boolean isNormal = false;
-		Boolean alreadyBeenCalled = true;
-		
-		Password priorityPassword = createPassword(priorityInitialPassword, isPriority, alreadyBeenCalled);
-		Password normalPassword = createPassword(normalInitialPassword, isNormal, alreadyBeenCalled);
-		
-		repository.save(priorityPassword);
-		repository.save(normalPassword);
+		initializePasswordNormal();
+		initializePasswordPriority();
 	}
 	
 	@Override
@@ -62,9 +53,41 @@ public class PasswordService implements IPasswordService{
 		return generateNewPassword(priority);
 	}
 	
-	private String generateNewPassword(Boolean priority) {	
+	private String initializePasswordNormal() {
+		String normalInitialPassword = "N0000";
+		Boolean isNormal = false;
+		Boolean alreadyBeenCalled = true;
+		Password normalPassword = createPassword(normalInitialPassword, isNormal, alreadyBeenCalled);
+		
+		repository.save(normalPassword);
+		
+		return normalInitialPassword;
+	}
+	
+	private String initializePasswordPriority() {
+		
+		String priorityInitialPassword = "P0000";
+		Boolean isPriority = true;
+		Boolean alreadyBeenCalled = true;
+		Password priorityPassword = createPassword(priorityInitialPassword, isPriority, alreadyBeenCalled);
+		
+		repository.save(priorityPassword);
+		
+		return priorityInitialPassword;
+	}
+	
+	private String generateNewPassword(Boolean priority) {
+		int maxPassword = 9999;
 		int sequence = checkLastPassword(priority);
 		int nextSequenceNumber = returnNextNumber(sequence);
+		
+		if(nextSequenceNumber > maxPassword && priority) {
+			initializePasswordPriority();
+		}
+		else if(nextSequenceNumber > maxPassword) {
+			initializePasswordNormal();
+		}
+		
 		String defaultPassword = standardizePassword(nextSequenceNumber);
 		Password password = completeNewPassword(priority, defaultPassword);
 		repository.save(password);
