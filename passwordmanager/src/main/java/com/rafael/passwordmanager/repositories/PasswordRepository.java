@@ -1,5 +1,7 @@
 package com.rafael.passwordmanager.repositories;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +15,8 @@ public interface PasswordRepository extends JpaRepository<Password, Integer> {
 	
 	@Transactional
 	public Password findTopByPriorityOrderByIdDesc(Boolean priority);
+	
+	@Transactional
+	public List<Password> findByAlreadyBeenCalledOrderById(Boolean alreadyBeenCalled);
 }
 

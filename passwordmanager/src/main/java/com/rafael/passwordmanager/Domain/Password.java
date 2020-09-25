@@ -17,6 +17,10 @@ public class Password {
 	private Boolean alreadyBeenCalled;
 	private LocalDateTime date;
 	
+	public Password() {
+		super();
+	}
+	
 	public Password(String password, 
 			Boolean priority, Boolean alreadyBeenCalled) {
 		super();
@@ -28,6 +32,10 @@ public class Password {
 
 	public Boolean getAlreadyBeenCalled() {
 		return alreadyBeenCalled;
+	}
+
+	public void setAlreadyBeenCalled(Boolean alreadyBeenCalled) {
+		this.alreadyBeenCalled = alreadyBeenCalled;
 	}
 
 	public int getId() {

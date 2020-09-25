@@ -1,0 +1,34 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f20dfeabba6, pid=21200, tid=23073
+#
+# JRE version: OpenJDK Runtime Environment (14.0.2+12) (build 14.0.2+12-46)
+# Java VM: OpenJDK 64-Bit Server VM (14.0.2+12-46, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjimage.so+0x3ba6]  ImageDecompressor::decompress_resource(unsigned char*, unsigned char*, unsigned long long, ImageStrings const*, Endian*)+0x26
+#
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -XX:+ShowCodeDetailsInExceptionMessages -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:34717 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=34957 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dspring.jmx.enabled=true -Dspring.application.admin.enabled=true -Djava.security.egd=file:/dev/./urandom -Xverify:none -XX:TieredStopAtLevel=1 -Dspring.boot.project.name=passwordmanager -javaagent:/home/rafael/Documentos/spring/spring-tool-suite-4-4.8.0.RELEASE-e4.17.0-linux.gtk.x86_64/sts-4.8.0.RELEASE/configuration/org.eclipse.osgi/257/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 com.rafael.passwordmanager.PasswordmanagerApplication --spring.output.ansi.enabled=always
+
+Host: Intel(R) Core(TM) i3-8130U CPU @ 2.20GHz, 4 cores, 3G, Debian GNU/Linux 10 (buster)
+Time: Fri Sep 25 15:59:44 2020 -03 elapsed time: 3093 seconds (0d 0h 51m 33s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f2070008800):  JavaThread "RMI TCP Connection(65)-127.0.0.1" daemon [_thread_in_vm, id=23073, stack(0x00007f2044fe4000,0x00007f20450e5000)]
+
+Stack: [0x00007f2044fe4000,0x00007f20450e5000],  sp=0x00007f20450e15a0,  free space=1013k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libjimage.so+0x3ba6]  ImageDecompressor::decompress_resource(unsigned char*, unsigned char*, unsigned long long, ImageStrings const*, Endian*)+0x26
+C  [libjimage.so+0x4e81]  ImageFileReader::get_resource(ImageLocation&, unsigned char*) const+0x71
+C  [libjimage.so+0x50fe]  ImageFileReader::get_resource(unsigned int, unsigned char*) const+0x4e
+C  [libjimage.so+0x5291]  JIMAGE_GetResource+0x11
+V  [libjvm.so+0x50f4c0]

@@ -17,8 +17,8 @@ public class CustomerController {
 
 	@GetMapping(value = "/getpassword={priority}")
 	public String getPassword(@PathVariable Boolean priority) {
-		
 		return passwordService.getPassword(priority);
-
 	}
+	
+	
 }

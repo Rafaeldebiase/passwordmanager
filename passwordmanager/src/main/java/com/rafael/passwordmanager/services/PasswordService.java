@@ -1,8 +1,10 @@
 package com.rafael.passwordmanager.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.NumberUtils;
 
 import com.rafael.passwordmanager.Domain.Password;
 import com.rafael.passwordmanager.interfaces.IPasswordService;
@@ -15,44 +17,78 @@ public class PasswordService implements IPasswordService{
 	private PasswordRepository repository;
 	
 	@Override
+	public String nextPassword() {
+		List<Password> passwordList = repository.findByAlreadyBeenCalledOrderById(false);
+		
+		if (passwordList.isEmpty())
+			return "Todas as senhas já foram chamadas";
+		
+		var priorityArray =  passwordList.stream()
+				.filter(item -> item.getpriority() == true)
+				.collect(Collectors.toList());
+		
+		if (!priorityArray.isEmpty()) {
+			Password priorityPassword = priorityArray.get(0);
+			priorityPassword.setAlreadyBeenCalled(true);
+			repository.save(priorityPassword);
+			return priorityPassword.getPassword();
+		} 
+		else {
+			Password password = (Password) passwordList.toArray()[0];
+			password.setAlreadyBeenCalled(true);
+			repository.save(password);
+			return password.getPassword();
+		}
+	}
+	
+	@Override
+	public void initializePassword() {
+		String priorityInitialPassword = "P0000";
+		String normalInitialPassword = "N0000";
+		Boolean isPriority = true;
+		Boolean isNormal = false;
+		Boolean alreadyBeenCalled = true;
+		
+		Password priorityPassword = createPassword(priorityInitialPassword, isPriority, alreadyBeenCalled);
+		Password normalPassword = createPassword(normalInitialPassword, isNormal, alreadyBeenCalled);
+		
+		repository.save(priorityPassword);
+		repository.save(normalPassword);
+	}
+	
+	@Override
 	public String getPassword(Boolean priority) {
-		var x = new Password("P0000", true, true);
-		repository.save(x);
-		var y = new Password("N0000", false, true);
-		repository.save(y);
-		var o = new Password("P0100", true, true);
-		repository.save(o);
-		var p = new Password("N0001", false, true);
-		repository.save(p);
 		
 		return generateNewPassword(priority);
 	}
 	
-	private String generateNewPassword(Boolean priority ) {		
+	private String generateNewPassword(Boolean priority) {	
 		int sequence = checkLastPassword(priority);
-		int nextSequenceNumber = returnNextNumber(sequence);	
+		int nextSequenceNumber = returnNextNumber(sequence);
 		String defaultPassword = standardizePassword(nextSequenceNumber);
-		Password password = completePassword(priority, defaultPassword);
+		Password password = completeNewPassword(priority, defaultPassword);
 		repository.save(password);
 		
 		return password.getPassword();
 	}
 	
-	private static Password completePassword(Boolean priority, String defaultPassword) {
+	private static Password completeNewPassword(Boolean priority, String defaultPassword) {
+		Boolean alreadyBeenCalled = false;
+		
 		if (priority) {
 			String identifier = "P";
 			String priorityPassword = identifier.concat(defaultPassword);
-			return createPassword(priorityPassword, priority);
+			return createPassword(priorityPassword, priority, alreadyBeenCalled);
 		}
 		else {
 			String identifier = "N";
 			String normalPassword = identifier.concat(defaultPassword);
-			return createPassword(normalPassword, priority);
+			return createPassword(normalPassword, priority, alreadyBeenCalled);
 		}
 	}
 	
-	private static Password createPassword(String password, Boolean priority) {
-		Boolean alreadyBeenCalled = false;
+	private static Password createPassword(String password, Boolean priority, 
+			Boolean alreadyBeenCalled) {
 		return new Password(password, priority, alreadyBeenCalled);
 	}
 	
@@ -84,11 +120,18 @@ public class PasswordService implements IPasswordService{
 	}
 	
 	private int checkLastPassword(Boolean priority) {
-		Password password = repository.findTopByPriorityOrderByIdDesc(priority);
-		String passwordNumber = password.getPassword().replaceAll("[^0-9]", "");
-		int sequence = Integer.parseInt(passwordNumber);
+		int sequence = 0;
+		Password password = repository.findTopByPriorityOrderByIdDesc(priority);	
+		
+		if (password != null) {
+			String passwordNumber = password.getPassword().replaceAll("[^0-9]", "");
+			sequence = Integer.parseInt(passwordNumber);			
+		}
+		
 		return sequence;
 	}
+
+
 	
 	
 }
