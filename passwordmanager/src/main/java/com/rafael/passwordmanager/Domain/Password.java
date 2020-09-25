@@ -11,16 +11,23 @@ public class Password {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	private String password;
-	private Boolean preferential;
+	private Boolean priority;
+	private Boolean alreadyBeenCalled;
 	private LocalDateTime date;
 	
-	public Password(int id, String password, Boolean preferential, LocalDateTime date) {
+	public Password(String password, 
+			Boolean priority, Boolean alreadyBeenCalled) {
 		super();
-		this.id = id;
 		this.password = password;
-		this.preferential = preferential;
+		this.priority = priority;
+		this.alreadyBeenCalled = alreadyBeenCalled;
 		this.date = LocalDateTime.now();
+	}
+
+	public Boolean getAlreadyBeenCalled() {
+		return alreadyBeenCalled;
 	}
 
 	public int getId() {
@@ -31,8 +38,8 @@ public class Password {
 		return password;
 	}
 
-	public Boolean getPreferential() {
-		return preferential;
+	public Boolean getpriority() {
+		return priority;
 	}
 
 	public LocalDateTime getDate() {
