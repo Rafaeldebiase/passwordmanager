@@ -7,16 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rafael.passwordmanager.Domain.Password;
-import com.rafael.passwordmanager.interfaces.IPasswordService;
 import com.rafael.passwordmanager.repositories.PasswordRepository;
 
 @Service
-public class PasswordService implements IPasswordService{
+public class PasswordService {
 
 	@Autowired
 	private PasswordRepository repository;
 	
-	@Override
 	public String nextPassword() {
 		List<Password> passwordList = repository.findByAlreadyBeenCalledOrderById(false);
 		
@@ -41,13 +39,11 @@ public class PasswordService implements IPasswordService{
 		}
 	}
 	
-	@Override
 	public void initializePassword() {
 		initializePasswordNormal();
 		initializePasswordPriority();
 	}
 	
-	@Override
 	public String getPassword(Boolean priority) {
 		
 		return generateNewPassword(priority);
