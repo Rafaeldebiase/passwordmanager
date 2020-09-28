@@ -12,7 +12,7 @@
 	<artifactId>passwordmanager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>passwordmanager</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Sistema de gestão de senhas</description>
 
 	<properties>
 		<java.version>11</java.version>
