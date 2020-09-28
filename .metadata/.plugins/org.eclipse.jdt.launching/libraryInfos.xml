@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
+    <libraryInfo home="/usr/lib/jvm/jdk-11.0.8" version="11.0.8"/>
+    <libraryInfo home="/usr/lib/jvm/java-11-openjdk-amd64/bin" version="11.0.8"/>
     <libraryInfo home="/home/rafael/Documentos/spring/spring-tool-suite-4-4.8.0.RELEASE-e4.17.0-linux.gtk.x86_64/sts-4.8.0.RELEASE/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932" version="14.0.2"/>
+    <libraryInfo home="/usr/lib/jvm/java-11-oracle/bin" version="11.0.8"/>
+    <libraryInfo home="/usr/bin" version="11.0.8"/>
+    <libraryInfo home="/home/rafael/Documentos/spring/spring-tool-suite-4-4.8.0.RELEASE-e4.17.0-linux.gtk.x86_64/sts-4.8.0.RELEASE" version="11.0.8"/>
     <libraryInfo home="/home/rafael/Documentos/spring/spring-tool-suite-4-4.8.0.RELEASE-e4.17.0-linux.gtk.x86_64/sts-4.8.0.RELEASE/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre" version="14.0.2"/>
 </libraryInfos>

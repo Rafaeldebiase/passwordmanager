@@ -1,0 +1,5 @@
+package com.rafael.passwordmanager.repositories;
+
+public class PasswordRepository {
+
+}

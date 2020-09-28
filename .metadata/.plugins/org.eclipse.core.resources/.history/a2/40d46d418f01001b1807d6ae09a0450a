@@ -1,0 +1,37 @@
+package com.rafael.passwordmanager.dto;
+
+import java.io.Serializable;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public class ManagerDto implements Serializable {
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	private static final long serialVersionUID = 1L;  
+		
+	private String userName;
+	private String password;
+	
+	public ManagerDto() {
+		
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = bCryptPasswordEncoder.encode(password);
+	}
+	
+	
+
+}

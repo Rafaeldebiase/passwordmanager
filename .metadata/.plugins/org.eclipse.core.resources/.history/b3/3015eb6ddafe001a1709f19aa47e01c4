@@ -1,0 +1,40 @@
+package com.rafael.passwordmanager.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rafael.passwordmanager.interfaces.IPasswordRepository;
+import com.rafael.passwordmanager.interfaces.IPasswordService;
+
+@Service
+public class PasswordService implements IPasswordService{
+
+	@Autowired
+	private IPasswordRepository repository;
+	
+	@Override
+	public String getPassword(Boolean priority) {
+		generatePassword(priority);
+		return null;
+	}
+	
+	private String generatePassword(Boolean priority ) {
+		if (priority)
+		{
+			checkLastPassword();
+		}else 
+		{
+			checkLastPassword();
+		}
+		
+		return null;
+	}
+	
+	private void checkLastPassword() {
+		var password = repository.getPassword().getPassword();
+		var x = password.replaceAll("[^0-9]", "");
+		
+		
+	}
+	
+}

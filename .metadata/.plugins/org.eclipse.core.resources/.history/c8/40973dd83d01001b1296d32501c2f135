@@ -1,0 +1,5 @@
+package com.rafael.passwordmanager.enums;
+
+public class ProfileEnum {
+
+}

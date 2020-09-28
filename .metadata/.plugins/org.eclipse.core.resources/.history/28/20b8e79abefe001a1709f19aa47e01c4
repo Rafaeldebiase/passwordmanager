@@ -1,0 +1,14 @@
+package com.rafael.passwordmanager.repositories;
+
+import org.springframework.stereotype.Repository;
+
+import com.rafael.passwordmanager.Domain.Password;
+import com.rafael.passwordmanager.interfaces.IPasswordRepository;
+
+@Repository
+public class PasswordRepository implements IPasswordRepository {
+	
+	public Password getPassword() {
+		return new Password(1, "P0001", true);
+	}
+}

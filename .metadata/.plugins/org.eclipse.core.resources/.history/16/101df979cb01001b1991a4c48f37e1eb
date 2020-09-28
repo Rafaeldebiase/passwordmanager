@@ -1,0 +1,14 @@
+spring.jpa.database=POSTGRESQL
+spring.datasource.platform=postgres
+spring.datasource.url=jdbc:postgresql://ec2-3-218-75-21.compute-1.amazonaws.com:5432/dcfj6e1vnqnur8
+spring.datasource.username=gsreiiczuhyywv
+spring.datasource.password=2aca704466beb760344708d1f071101c3481239bcd040d591d04f2e79af59838
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+spring.jpa.show-sql=false
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.properties.hibernate.format_sql=false
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+
+spring.jpa.properties.jadira.usertype.autoRegisterUserTypes=true

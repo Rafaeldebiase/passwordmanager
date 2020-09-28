@@ -1,0 +1,16 @@
+package com.rafael.passwordmanager.services;
+
+import org.springframework.stereotype.Service;
+
+import com.rafael.passwordmanager.interfaces.IPasswordService;
+
+@Service
+public class PasswordService implements IPasswordService{
+
+	@Override
+	public String getPassword(Boolean priority) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

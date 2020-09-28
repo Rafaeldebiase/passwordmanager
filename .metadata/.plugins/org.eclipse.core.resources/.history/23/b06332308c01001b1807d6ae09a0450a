@@ -1,0 +1,8 @@
+package com.rafael.passwordmanager.interfaces;
+
+import com.rafael.passwordmanager.Domain.Manager;
+import com.rafael.passwordmanager.dto.ManagerDto;
+
+public interface IManagerService {
+	void Create(ManagerDto managerDto);
+}

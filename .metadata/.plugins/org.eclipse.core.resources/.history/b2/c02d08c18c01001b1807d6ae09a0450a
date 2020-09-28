@@ -1,0 +1,20 @@
+package com.rafael.passwordmanager.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rafael.passwordmanager.Domain.Manager;
+import com.rafael.passwordmanager.dto.ManagerDto;
+import com.rafael.passwordmanager.repositories.ManagerRepository;
+
+@Service
+public class ManagerService {
+	
+	@Autowired
+	private ManagerRepository repository;
+	
+	public void Create(ManagerDto manager) {
+		repository.save(manager);
+	}
+
+}

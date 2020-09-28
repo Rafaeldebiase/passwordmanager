@@ -1,0 +1,15 @@
+package com.rafael.passwordmanager.security;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
+public class AuthorizationFilter extends BasicAuthenticationFilter {
+
+	private TokenFactory tokenFactory;
+	
+	public AuthorizationFilter(AuthenticationManager authenticationManager, TokenFactory tokenFactory) {
+		super(authenticationManager);
+		this.tokenFactory = tokenFactory;
+	}
+
+}

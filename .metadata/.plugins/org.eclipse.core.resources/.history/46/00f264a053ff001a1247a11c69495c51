@@ -1,0 +1,132 @@
+package com.rafael.passwordmanager.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rafael.passwordmanager.Domain.Password;
+import com.rafael.passwordmanager.interfaces.IPasswordService;
+import com.rafael.passwordmanager.repositories.PasswordRepository;
+
+@Service
+public class PasswordService implements IPasswordService{
+
+	@Autowired
+	private PasswordRepository repository;
+	
+	@Override
+	public String nextPassword() {
+		Password[] passwordArray = (Password[]) repository.findByAlreadyBeenCalledOrderById(false).toArray();
+		
+		Password[] priorityArray = (Password[]) passwordArray.stream().filter(item -> item.getpriority() == true).toArray();
+		
+		if (priorityArray.length != 0) {
+			Password priorityPassword = priorityArray[0];
+			priorityPassword.setAlreadyBeenCalled(true);
+			repository.save(priorityPassword);
+			return priorityPassword.getPassword();
+		} 
+		else {
+			Password password = passwordList
+		}
+		
+		
+		
+		return null;
+	}
+	
+	@Override
+	public void initializePassword() {
+		String priorityInitialPassword = "P0000";
+		String normalInitialPassword = "N0000";
+		Boolean isPriority = true;
+		Boolean isNormal = false;
+		Boolean alreadyBeenCalled = true;
+		
+		Password priorityPassword = createPassword(priorityInitialPassword, isPriority, alreadyBeenCalled);
+		Password normalPassword = createPassword(normalInitialPassword, isNormal, alreadyBeenCalled);
+		
+		repository.save(priorityPassword);
+		repository.save(normalPassword);
+	}
+	
+	@Override
+	public String getPassword(Boolean priority) {
+		
+		return generateNewPassword(priority);
+	}
+	
+	private String generateNewPassword(Boolean priority) {	
+		int sequence = checkLastPassword(priority);
+		int nextSequenceNumber = returnNextNumber(sequence);
+		String defaultPassword = standardizePassword(nextSequenceNumber);
+		Password password = completeNewPassword(priority, defaultPassword);
+		repository.save(password);
+		
+		return password.getPassword();
+	}
+	
+	private static Password completeNewPassword(Boolean priority, String defaultPassword) {
+		Boolean alreadyBeenCalled = false;
+		
+		if (priority) {
+			String identifier = "P";
+			String priorityPassword = identifier.concat(defaultPassword);
+			return createPassword(priorityPassword, priority, alreadyBeenCalled);
+		}
+		else {
+			String identifier = "N";
+			String normalPassword = identifier.concat(defaultPassword);
+			return createPassword(normalPassword, priority, alreadyBeenCalled);
+		}
+	}
+	
+	private static Password createPassword(String password, Boolean priority, 
+			Boolean alreadyBeenCalled) {
+		return new Password(password, priority, alreadyBeenCalled);
+	}
+	
+	private static String standardizePassword(int nextSequenceNumber) {
+		String pattern = null;
+		String sequence = Integer.toString(nextSequenceNumber);
+		int amountDigits = sequence.length();
+		
+		switch (amountDigits) {
+		case 1:
+			pattern = "000";
+			break;
+		case 2:
+			pattern = "00";
+			break;
+		case 3:
+			pattern = "0";
+			break;
+		default:
+			break;
+		}
+		
+		return pattern.concat(sequence);
+	}
+	
+	private static int returnNextNumber(int sequence) {
+		int next = 1; 
+		return sequence + next;
+	}
+	
+	private int checkLastPassword(Boolean priority) {
+		int sequence = 0;
+		Password password = repository.findTopByPriorityOrderByIdDesc(priority);	
+		
+		if (password != null) {
+			String passwordNumber = password.getPassword().replaceAll("[^0-9]", "");
+			sequence = Integer.parseInt(passwordNumber);			
+		}
+		
+		return sequence;
+	}
+
+
+	
+	
+}

@@ -1,0 +1,10 @@
+package com.rafael.passwordmanager.repositories;
+
+import org.springframework.stereotype.Repository;
+
+import com.rafael.passwordmanager.interfaces.IPasswordRepository;
+
+@Repository
+public class PasswordRepository implements IPasswordRepository {
+
+}

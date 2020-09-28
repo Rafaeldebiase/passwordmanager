@@ -1,0 +1,7 @@
+package com.rafael.passwordmanager.interfaces;
+
+import com.rafael.passwordmanager.Domain.Manager;
+
+public interface IManagerService {
+	void Create(Manager manager);
+}

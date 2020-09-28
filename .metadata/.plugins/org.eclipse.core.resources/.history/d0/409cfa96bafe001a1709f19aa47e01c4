@@ -1,0 +1,18 @@
+package com.rafael.passwordmanager.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/rest/v1/customer")
+public class CustomerController {
+
+	@GetMapping(value = "/getpassword={priority}")
+	public String getPassword(@PathVariable Boolean priority) {
+		
+		
+		return "P####";
+	}
+}

@@ -1,0 +1,6 @@
+
+spring.profiles.active=dev
+
+
+jwt.secret=rafael
+jwt.expiration=86400000

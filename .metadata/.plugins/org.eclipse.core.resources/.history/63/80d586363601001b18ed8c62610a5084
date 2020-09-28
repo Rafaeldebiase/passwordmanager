@@ -1,0 +1,5 @@
+package com.rafael.passwordmanager.interfaces;
+
+public class IManagerService {
+
+}

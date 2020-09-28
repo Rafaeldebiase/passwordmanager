@@ -1,0 +1,5 @@
+package com.rafael.passwordmanager.services;
+
+public class UserDetailsService {
+
+}
