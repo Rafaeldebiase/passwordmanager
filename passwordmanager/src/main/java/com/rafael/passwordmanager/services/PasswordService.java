@@ -1,10 +1,13 @@
 package com.rafael.passwordmanager.services;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+
 
 import com.rafael.passwordmanager.Domain.Password;
 import com.rafael.passwordmanager.repositories.PasswordRepository;
@@ -15,11 +18,18 @@ public class PasswordService {
 	@Autowired
 	private PasswordRepository repository;
 	
+	@Autowired
+	private SimpMessagingTemplate template;
+	
+	
 	public String nextPassword() {
 		List<Password> passwordList = repository.findByAlreadyBeenCalledOrderById(false);
 		
-		if (passwordList.isEmpty())
-			return "Todas as senhas já foram chamadas";
+		if (passwordList.isEmpty()) {
+			String message = "Todas as senhas já foram chamadas";
+			template.convertAndSend("/topic/next", message);
+			return message;			
+		}
 		
 		var priorityArray =  passwordList.stream()
 				.filter(item -> item.getpriority() == true)
@@ -29,13 +39,15 @@ public class PasswordService {
 			Password priorityPassword = priorityArray.get(0);
 			priorityPassword.setAlreadyBeenCalled(true);
 			repository.save(priorityPassword);
+			template.convertAndSend("/topic/next", priorityPassword.getPassword());
 			return priorityPassword.getPassword();
 		} 
 		else {
-			Password password = (Password) passwordList.toArray()[0];
-			password.setAlreadyBeenCalled(true);
-			repository.save(password);
-			return password.getPassword();
+			Password normalPassword = (Password) passwordList.toArray()[0];
+			normalPassword.setAlreadyBeenCalled(true);
+			repository.save(normalPassword);
+			template.convertAndSend("/topic/next", normalPassword.getPassword());
+			return normalPassword.getPassword();
 		}
 	}
 	

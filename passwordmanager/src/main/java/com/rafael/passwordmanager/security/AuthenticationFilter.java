@@ -57,6 +57,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		String username = ((UserSecurity) auth.getPrincipal()).getUsername();
         String token = tokenFactory.generateToken(username);
         response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("access-control-expose-headers", "Authorization");
 		
 	}
 	

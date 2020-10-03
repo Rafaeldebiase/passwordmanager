@@ -7,8 +7,6 @@ RUN mvn clean install
 
 FROM openjdk:11-jdk
 
-MAINTAINER Rafael de Biase
-
 VOLUME /tpm
 
 COPY --from=0 "/passwordmanager/target/passwordmanager-0.0.1-SNAPSHOT.jar" app.jar

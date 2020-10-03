@@ -13,7 +13,7 @@ import com.rafael.passwordmanager.services.ManagerService;
 
 @RestController
 @RequestMapping(value = "/rest/v1/manager")
-public class ManagerControler {
+public class ManagerController {
 	
 	@Autowired
 	private ManagerService service;
