@@ -7,7 +7,7 @@ pipeline{
                     dir 'passwordmanager'
                 }
             }
-            step {
+            steps {
                 echo 'bild docker'
             }
         }
