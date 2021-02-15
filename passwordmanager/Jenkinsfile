@@ -1,8 +1,11 @@
 pipeline{
     agent none
     stages{
-        agent dockerfile {
-            dir 'passwordmanager'
+        agent {
+            dockerfile {
+                dir 'passwordmanager'
+            }
         }
+        
     }
 }
