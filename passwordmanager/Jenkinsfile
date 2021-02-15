@@ -6,6 +6,9 @@ pipeline{
                 dir 'passwordmanager'
             }
         }
+        stage {
+            echo 'testando docker'
+        }
         
     }
 }
