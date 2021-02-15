@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 2 elements from project &apos;passwordmanager&apos;&#x0A;- Original project: &apos;passwordmanager&apos;&#x0A;- Original elements:&#x0A;     app.js&#x0A;     index.html" description="Delete elements" element1="src/main/resources/static/app.js" element2="src/main/resources/static/index.html" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="2" stamp="1602298655671" subPackages="false" version="1.0"/>
+</session>

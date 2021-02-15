@@ -36,13 +36,13 @@ public class SecurityConfig extends  WebSecurityConfigurerAdapter {
 	private static final String[] PUBLIC_MATCHERS = {
 			"/rest/v1/manager/create",
 			"/rest/v1/password/getpassword={priority}",
-			"/*"
+			"/ws/*"
 	};
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		 web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**",
-		"/swagger-ui.html", "/webjars/**");
+		"/swagger-ui.html", "/webjars/**","/ws/**");
 	}
 	
 	@Override

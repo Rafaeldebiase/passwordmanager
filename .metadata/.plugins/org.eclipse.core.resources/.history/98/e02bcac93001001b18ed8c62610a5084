@@ -1,5 +1,0 @@
-package com.rafael.passwordmanager.config;
-
-public class SecurityConfig {
-
-}

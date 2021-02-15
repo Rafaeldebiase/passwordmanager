@@ -1,7 +1,0 @@
-package com.rafael.passwordmanager.interfaces;
-
-import com.rafael.passwordmanager.Domain.Password;
-
-public interface IPasswordRepository {
-	Password getPassword();
-}

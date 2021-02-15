@@ -1,5 +1,0 @@
-package com.rafael.passwordmanager.dto;
-
-public class CredentialsDto {
-
-}

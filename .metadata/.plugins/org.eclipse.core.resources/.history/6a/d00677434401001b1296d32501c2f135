@@ -1,7 +1,0 @@
-package com.rafael.passwordmanager.services;
-
-import org.springframework.security.core.userdetails.UserDetails;
-
-public class UserService implements org.springframework.security.core.userdetails.UserDetailsService {
-
-}
