@@ -1,14 +1,15 @@
 pipeline{
     agent none
     stages{
-        agent {
-            dockerfile {
-                dir 'passwordmanager'
+        stage('Build') {
+            agent {
+                dockerfile {
+                    dir 'passwordmanager'
+                }
+            }
+            step {
+                echo 'bild docker'
             }
         }
-        stage {
-            echo 'testando docker'
-        }
-        
     }
 }
